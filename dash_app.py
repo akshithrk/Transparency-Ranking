@@ -62,10 +62,10 @@ app.layout = html.Div([
 )
 
 def update_graph(year):
-    filename = "/Users/ak/Documents/GitHub/Transparency-Ranking/finance datasets/2006.csv"
+    # filename = "/Users/ak/Documents/GitHub/Transparency-Ranking/finance datasets/2006.csv"
     title = "Model re-ranking vs Original ranking for the selected year"
-    df = pd.read_csv(
-        '/Users/ak/Documents/GitHub/Transparency-Ranking/finance datasets/2006.csv')
+    df1 = pd.read_csv('/Users/ak/Documents/GitHub/Transparency-Ranking/finance datasets/all.csv')
+    df = df1.loc[df1['one_qid'] == year]
     fig = make_subplots(rows=5, cols=2,
                 specs=[[{"type": "domain"}, {"type": "domain"}],
                     [{"type": "domain"}, {"type": "domain"}],
