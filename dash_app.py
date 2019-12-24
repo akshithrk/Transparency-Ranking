@@ -22,7 +22,7 @@ app.layout = html.Div([
     html.Hr(),
     html.Div([
             html.H2("Across years"),
-            html.Div(children="This task studies the re-ranking of states for the selected year",
+            html.Div(children="This task compares Original rank with the model re-rank of states for the selected year",
                 style={'font-style': 'normal'}),
             html.Br(),
             html.Div(children="Years:", style={'font-style': 'italic'}),
@@ -65,7 +65,7 @@ def update_graph(year):
     # filename = "/Users/ak/Documents/GitHub/Transparency-Ranking/finance datasets/2006.csv"
     title = "Model re-ranking vs Original ranking for the selected year"
     df1 = pd.read_csv('/Users/ak/Documents/GitHub/Transparency-Ranking/finance datasets/all.csv')
-    df = df1.loc[df1['one_qid'] == year]
+    df = df1.loc[df1['one_qid'] == int(year)]
     fig = make_subplots(rows=5, cols=2,
                 specs=[[{"type": "domain"}, {"type": "domain"}],
                     [{"type": "domain"}, {"type": "domain"}],
