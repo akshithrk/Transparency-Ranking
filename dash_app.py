@@ -51,6 +51,59 @@ app.layout = html.Div([
                 )
             ]),
             html.Br(),
+            html.Div([
+                dcc.Graph(
+                    id='Vis-1-2',
+                )
+            ]),
+            html.Br(),
+            html.Div([
+                dcc.Graph(
+                    id='Vis-1-3',
+                )
+            ]),
+            html.Br(),
+            html.Div([
+                dcc.Graph(
+                    id='Vis-1-4',
+                )
+            ]),
+            html.Br(),
+            html.Div([
+                dcc.Graph(
+                    id='Vis-1-5',
+                )
+            ]),
+            html.Br(),
+            html.Div([
+                dcc.Graph(
+                    id='Vis-1-6',
+                )
+            ]),
+            html.Br(),
+            html.Div([
+                dcc.Graph(
+                    id='Vis-1-7',
+                )
+            ]),
+            html.Br(),
+            html.Div([
+                dcc.Graph(
+                    id='Vis-1-8',
+                )
+            ]),
+            html.Br(),
+            html.Div([
+                dcc.Graph(
+                    id='Vis-1-9',
+                )
+            ]),
+            html.Br(),
+            html.Div([
+                dcc.Graph(
+                    id='Vis-1-10',
+                )
+            ]),
             html.Br(),
         ])
 ])
@@ -58,6 +111,15 @@ app.layout = html.Div([
 #Task callback for Task 1
 @app.callback(
     [Output('Vis-1-1', 'figure')],
+    [Output('Vis-1-2', 'figure')],
+    [Output('Vis-1-3', 'figure')],
+    [Output('Vis-1-4', 'figure')],
+    [Output('Vis-1-5', 'figure')],
+    [Output('Vis-1-6', 'figure')],
+    [Output('Vis-1-7', 'figure')],
+    [Output('Vis-1-8', 'figure')],
+    [Output('Vis-1-9', 'figure')],
+    [Output('Vis-1-10', 'figure')],
     [Input("drop-down-year-task1", "value")]
 )
 
@@ -66,177 +128,177 @@ def update_graph(year):
     title = "Model re-ranking vs Original ranking for the selected year"
     df1 = pd.read_csv('/Users/ak/Documents/GitHub/Transparency-Ranking/finance datasets/all.csv')
     df = df1.loc[df1['one_qid'] == int(year)]
-    fig = make_subplots(rows=5, cols=2,
-                specs=[[{"type": "domain"}, {"type": "domain"}],
-                    [{"type": "domain"}, {"type": "domain"}],
-                    [{"type": "domain"}, {"type": "domain"}],
-                    [{"type": "domain"}, {"type": "domain"}],
-                    [{"type": "domain"}, {"type": "domain"}]]
-    )
+    # fig = make_subplots(rows=5, cols=2,
+    #             specs=[[{"type": "domain"}, {"type": "domain"}],
+    #                 [{"type": "domain"}, {"type": "domain"}],
+    #                 [{"type": "domain"}, {"type": "domain"}],
+    #                 [{"type": "domain"}, {"type": "domain"}],
+    #                 [{"type": "domain"}, {"type": "domain"}]]
+    # )
     # 1
     #  left
-    fig.add_trace(
-        go.Parcoords(
-            dimensions = list([
-                dict(range = [1,50],
-                    constraintrange = [15,35],
-                    label = "Ground Truth", values = df['two_realRank']),
-        
-                dict(range = [1,50],
-                    label = 'Ada Rerank', values = df['map_AdaRank_rerank'])
-            ])
-        ), 
-        row=1,
-        col=1
-    ),
+    # fig.add_trace(
+    fig1 = go.Parcoords(
+        dimensions = list([
+            dict(range = [1,50],
+                constraintrange = [15,35],
+                label = "Ground Truth", values = df['two_realRank']),
+    
+            dict(range = [1,50],
+                label = 'Ada Rerank', values = df['map_AdaRank_rerank'])
+        ])
+    )
+    #     row=1,
+    #     col=1
+    # ),
     # 2
     # Right
-    fig.add_trace(
-        go.Parcoords(
-            dimensions = list([
-                dict(range = [1,50],
-                    constraintrange = [15,35],
-                    label = "Ground Truth", values = df['two_realRank']),
-                
-                dict(range = [1,50],
-                    label = 'LambdaMART Rerank', values = df['map_LambdaMART_rerank'])
-            ])
-        ), 
-        row=1,
-        col=2
-    ),
+    # fig.add_trace(
+    fig2 = go.Parcoords(
+        dimensions = list([
+            dict(range = [1,50],
+                constraintrange = [15,35],
+                label = "Ground Truth", values = df['two_realRank']),
+            
+            dict(range = [1,50],
+                label = 'LambdaMART Rerank', values = df['map_LambdaMART_rerank'])
+        ])
+    )
+    #     row=1,
+    #     col=2
+    # ),
     # 3
     #  left
-    fig.add_trace(
-        go.Parcoords(
-            dimensions = list([
-                dict(range = [1,50],
-                    constraintrange = [15,35],
-                    label = "Ground Truth", values = df['two_realRank']),
-                
-                dict(range = [1,50],
-                    label = 'LambdaRank Rerank', values = df['map_LambdaRank_rerank'])
-            ])
-        ), 
-        row=2,
-        col=1
-    ),
+    # fig.add_trace(
+    fig3 = go.Parcoords(
+        dimensions = list([
+            dict(range = [1,50],
+                constraintrange = [15,35],
+                label = "Ground Truth", values = df['two_realRank']),
+            
+            dict(range = [1,50],
+                label = 'LambdaRank Rerank', values = df['map_LambdaRank_rerank'])
+        ])
+    )
+    #     row=2,
+    #     col=1
+    # ),
     # 4
     #  Right
-    fig.add_trace(
-        go.Parcoords(
-            dimensions = list([
-                dict(range = [1,50],
-                    constraintrange = [15,35],
-                    label = "Ground Truth", values = df['two_realRank']),
-                
-                dict(range = [1,50],
-                    label = 'ListNet Rerank', values = df['map_ListNet_rerank'])
-            ])
-        ), 
-        row=2,
-        col=2
-    ),
+    # fig.add_trace(
+    fig4 = go.Parcoords(
+        dimensions = list([
+            dict(range = [1,50],
+                constraintrange = [15,35],
+                label = "Ground Truth", values = df['two_realRank']),
+            
+            dict(range = [1,50],
+                label = 'ListNet Rerank', values = df['map_ListNet_rerank'])
+        ])
+    )
+    #     row=2,
+    #     col=2
+    # ),
     # 5
     # Left
-    fig.add_trace(
-        go.Parcoords(
-            dimensions = list([
-                dict(range = [1,50],
-                    constraintrange = [15,35],
-                    label = "Ground Truth", values = df['two_realRank']),
-                
-                dict(range = [1,50],
-                    label = 'MART Rerank', values = df['map_MART_rerank'])
-            ])
-        ), 
-        row=3,
-        col=1
-    ),
+    # fig.add_trace(
+    fig5 = go.Parcoords(
+        dimensions = list([
+            dict(range = [1,50],
+                constraintrange = [15,35],
+                label = "Ground Truth", values = df['two_realRank']),
+            
+            dict(range = [1,50],
+                label = 'MART Rerank', values = df['map_MART_rerank'])
+        ])
+    )
+    #     row=3,
+    #     col=1
+    # ),
     # 6
     #  Right
-    fig.add_trace(
-        go.Parcoords(
-            dimensions = list([
-                dict(range = [1,50],
-                    constraintrange = [15,35],
-                    label = "Ground Truth", values = df['two_realRank']),
-                
-                dict(range = [1,50],
-                    label = 'RankBoost Rerank', values = df['map_RankBoost_rerank'])
-            ])
-        ), 
-        row=3,
-        col=2
-    ),
+    # fig.add_trace(
+    fig6 = go.Parcoords(
+        dimensions = list([
+            dict(range = [1,50],
+                constraintrange = [15,35],
+                label = "Ground Truth", values = df['two_realRank']),
+            
+            dict(range = [1,50],
+                label = 'RankBoost Rerank', values = df['map_RankBoost_rerank'])
+        ])
+    )
+    #     row=3,
+    #     col=2
+    # ),
     # 7
     #  left
-    fig.add_trace(
-        go.Parcoords(
-            dimensions = list([
-                dict(range = [1,50],
-                    constraintrange = [15,35],
-                    label = "Ground Truth", values = df['two_realRank']),
-                
-                dict(range = [1,50],
-                    label = 'RankNet Rerank', values = df['map_RankNet_rerank'])
-            ])
-        ), 
-        row=4,
-        col=1
-    ),
+    # fig.add_trace(
+    fig7 = go.Parcoords(
+        dimensions = list([
+            dict(range = [1,50],
+                constraintrange = [15,35],
+                label = "Ground Truth", values = df['two_realRank']),
+            
+            dict(range = [1,50],
+                label = 'RankNet Rerank', values = df['map_RankNet_rerank'])
+        ])
+    )
+    #     row=4,
+    #     col=1
+    # ),
     # 8
     #  Right
-    fig.add_trace(
-        go.Parcoords(
-            dimensions = list([
-                dict(range = [1,50],
-                    constraintrange = [15,35],
-                    label = "Ground Truth", values = df['two_realRank']),
-                
-                dict(range = [1,50],
-                    label = 'coordinate_ascent Rerank', values = df['map_coordinate_ascent_rerank'])
-            ])
-        ), 
-        row=4,
-        col=2
-    ),
+    # fig.add_trace(
+    fig8 = go.Parcoords(
+        dimensions = list([
+            dict(range = [1,50],
+                constraintrange = [15,35],
+                label = "Ground Truth", values = df['two_realRank']),
+            
+            dict(range = [1,50],
+                label = 'coordinate_ascent Rerank', values = df['map_coordinate_ascent_rerank'])
+        ])
+    )
+    #     row=4,
+    #     col=2
+    # ),
     # 9
     # Left
-    fig.add_trace(
-        go.Parcoords(
-            dimensions = list([
-                dict(range = [1,50],
-                    constraintrange = [15,35],
-                    label = "Ground Truth", values = df['two_realRank']),
-                
-                dict(range = [1,50],
-                    label = 'linear_regression Rerank', values = df['map_linear_regression_rerank'])
-            ])
-        ),
-        row=5,
-        col=1
-    ),
+    # fig.add_trace(
+    fig9 = go.Parcoords(
+        dimensions = list([
+            dict(range = [1,50],
+                constraintrange = [15,35],
+                label = "Ground Truth", values = df['two_realRank']),
+            
+            dict(range = [1,50],
+                label = 'linear_regression Rerank', values = df['map_linear_regression_rerank'])
+        ])
+    )
+    #     row=5,
+    #     col=1
+    # ),
     # 10
     # Right
-    fig.add_trace(
-        go.Parcoords(
-            dimensions = list([
-                dict(range = [1,50],
-                    constraintrange = [15,35],
-                    label = "Ground Truth", values = df['two_realRank']),
-                
-                dict(range = [1,50],
-                    label = 'random_forest Rerank', values = df['map_random_forest_rerank'])
-            ])
-        ), 
-        row=5,
-        col=2
+    # fig.add_trace(
+    fig10 = go.Parcoords(
+        dimensions = list([
+            dict(range = [1,50],
+                constraintrange = [15,35],
+                label = "Ground Truth", values = df['two_realRank']),
+            
+            dict(range = [1,50],
+                label = 'random_forest Rerank', values = df['map_random_forest_rerank'])
+        ])
     )
+    #     row=5,
+    #     col=2
+    # )
 
-    fig.update_layout(autosize=False, height=1500)
+    # fig.update_layout(autosize=False, height=1500)
         # fig.show()
-    return [fig]
+    return fig1, fig2, fig3, fig4, fig5, fig6, fig7, fig8, fig9, fig10
 
 if __name__ == "__main__":
     app.run_server(debug=False)
