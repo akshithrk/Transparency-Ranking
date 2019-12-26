@@ -81,7 +81,7 @@ def update_graph(year):
                 dict(range = [1,50],
                     constraintrange = [15,35],
                     label = "Ground Truth", values = df['two_realRank']),
-                
+        
                 dict(range = [1,50],
                     label = 'Ada Rerank', values = df['map_AdaRank_rerank'])
             ])
