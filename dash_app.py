@@ -298,7 +298,7 @@ def update_graph(year):
 
     # fig.update_layout(autosize=False, height=1500)
         # fig.show()
-    return fig1, fig2, fig3, fig4, fig5, fig6, fig7, fig8, fig9, fig10
+    return [fig1, fig2, fig3, fig4, fig5, fig6, fig7, fig8, fig9, fig10]
 
 if __name__ == "__main__":
     app.run_server(debug=False)
