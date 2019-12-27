@@ -110,16 +110,16 @@ app.layout = html.Div([
 
 #Task callback for Task 1
 @app.callback(
-    [Output('Vis-1-1', 'figure')],
-    [Output('Vis-1-2', 'figure')],
-    [Output('Vis-1-3', 'figure')],
-    [Output('Vis-1-4', 'figure')],
-    [Output('Vis-1-5', 'figure')],
-    [Output('Vis-1-6', 'figure')],
-    [Output('Vis-1-7', 'figure')],
-    [Output('Vis-1-8', 'figure')],
-    [Output('Vis-1-9', 'figure')],
-    [Output('Vis-1-10', 'figure')],
+    [Output('Vis-1-1', 'figure'),
+    Output('Vis-1-2', 'figure'),
+    Output('Vis-1-3', 'figure'),
+    Output('Vis-1-4', 'figure'),
+    Output('Vis-1-5', 'figure'),
+    Output('Vis-1-6', 'figure'),
+    Output('Vis-1-7', 'figure'),
+    Output('Vis-1-8', 'figure'),
+    Output('Vis-1-9', 'figure'),
+    Output('Vis-1-10', 'figure')],
     [Input("drop-down-year-task1", "value")]
 )
 
