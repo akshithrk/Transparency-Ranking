@@ -156,8 +156,8 @@ def update_graph(year):
     fig9 = px.parallel_coordinates(df2)
     df2 = df[['2-realRank', 'map_random_forest_rerank']]
     fig10 = px.parallel_coordinates(df2)
-    
     '''
+
     fig6 = go.Parcoords(
         dimensions=list([
             dict(range=[1, 50],
@@ -316,4 +316,4 @@ def update_graph(year):
     return [fig1, fig2,fig3, fig4, fig5, fig6, fig6, fig6, fig6, fig6]
 
 if __name__ == "__main__":
-    app.run_server(debug=False)
+    app.run_server(debug=True)
