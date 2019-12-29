@@ -126,8 +126,8 @@ app.layout = html.Div([
 def update_graph(year):
     # filename = "/Users/ak/Documents/GitHub/Transparency-Ranking/finance datasets/2006.csv"
     title = "Model re-ranking vs Original ranking for the selected year"
-    df1 = pd.read_csv('/Users/ak/Documents/GitHub/Transparency-Ranking/finance datasets/all.csv')
-    df = df1.loc[df1['one_qid'] == int(year)]
+    df1 = pd.read_csv('finance datasets/all.csv')
+    df = df1.loc[df1['1-qid'] == int(year)]
     # fig = make_subplots(rows=5, cols=2,
     #             specs=[[{"type": "domain"}, {"type": "domain"}],
     #                 [{"type": "domain"}, {"type": "domain"}],
@@ -142,7 +142,7 @@ def update_graph(year):
         dimensions = list([
             dict(range = [1,50],
                 constraintrange = [15,35],
-                label = "Ground Truth", values = df['two_realRank']),
+                label = "Ground Truth", values = df['2-realRank']),
     
             dict(range = [1,50],
                 label = 'Ada Rerank', values = df['map_AdaRank_rerank'])
@@ -158,7 +158,7 @@ def update_graph(year):
         dimensions = list([
             dict(range = [1,50],
                 constraintrange = [15,35],
-                label = "Ground Truth", values = df['two_realRank']),
+                label = "Ground Truth", values = df['2-realRank']),
             
             dict(range = [1,50],
                 label = 'LambdaMART Rerank', values = df['map_LambdaMART_rerank'])
@@ -174,7 +174,7 @@ def update_graph(year):
         dimensions = list([
             dict(range = [1,50],
                 constraintrange = [15,35],
-                label = "Ground Truth", values = df['two_realRank']),
+                label = "Ground Truth", values = df['2-realRank']),
             
             dict(range = [1,50],
                 label = 'LambdaRank Rerank', values = df['map_LambdaRank_rerank'])
@@ -190,7 +190,7 @@ def update_graph(year):
         dimensions = list([
             dict(range = [1,50],
                 constraintrange = [15,35],
-                label = "Ground Truth", values = df['two_realRank']),
+                label = "Ground Truth", values = df['2-realRank']),
             
             dict(range = [1,50],
                 label = 'ListNet Rerank', values = df['map_ListNet_rerank'])
@@ -206,7 +206,7 @@ def update_graph(year):
         dimensions = list([
             dict(range = [1,50],
                 constraintrange = [15,35],
-                label = "Ground Truth", values = df['two_realRank']),
+                label = "Ground Truth", values = df['2-realRank']),
             
             dict(range = [1,50],
                 label = 'MART Rerank', values = df['map_MART_rerank'])
@@ -222,7 +222,7 @@ def update_graph(year):
         dimensions = list([
             dict(range = [1,50],
                 constraintrange = [15,35],
-                label = "Ground Truth", values = df['two_realRank']),
+                label = "Ground Truth", values = df['2-realRank']),
             
             dict(range = [1,50],
                 label = 'RankBoost Rerank', values = df['map_RankBoost_rerank'])
@@ -238,7 +238,7 @@ def update_graph(year):
         dimensions = list([
             dict(range = [1,50],
                 constraintrange = [15,35],
-                label = "Ground Truth", values = df['two_realRank']),
+                label = "Ground Truth", values = df['2-realRank']),
             
             dict(range = [1,50],
                 label = 'RankNet Rerank', values = df['map_RankNet_rerank'])
@@ -254,7 +254,7 @@ def update_graph(year):
         dimensions = list([
             dict(range = [1,50],
                 constraintrange = [15,35],
-                label = "Ground Truth", values = df['two_realRank']),
+                label = "Ground Truth", values = df['2-realRank']),
             
             dict(range = [1,50],
                 label = 'coordinate_ascent Rerank', values = df['map_coordinate_ascent_rerank'])
@@ -270,7 +270,7 @@ def update_graph(year):
         dimensions = list([
             dict(range = [1,50],
                 constraintrange = [15,35],
-                label = "Ground Truth", values = df['two_realRank']),
+                label = "Ground Truth", values = df['2-realRank']),
             
             dict(range = [1,50],
                 label = 'linear_regression Rerank', values = df['map_linear_regression_rerank'])
@@ -286,7 +286,7 @@ def update_graph(year):
         dimensions = list([
             dict(range = [1,50],
                 constraintrange = [15,35],
-                label = "Ground Truth", values = df['two_realRank']),
+                label = "Ground Truth", values = df['2-realRank']),
             
             dict(range = [1,50],
                 label = 'random_forest Rerank', values = df['map_random_forest_rerank'])
@@ -301,4 +301,4 @@ def update_graph(year):
     return [fig1, fig2, fig3, fig4, fig5, fig6, fig7, fig8, fig9, fig10]
 
 if __name__ == "__main__":
-    app.run_server(debug=False)
+    app.run_server(debug=True)
