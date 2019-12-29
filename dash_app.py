@@ -134,10 +134,10 @@ def update_graph(year):
 
     df2 = df[['2-realRank', 'map_LambdaMART_rerank']]
     fig2 = px.parallel_coordinates(df2)
-    '''
+
     df2 = df[['2-realRank', 'map_LambdaRank_rerank']]
     fig3 = px.parallel_coordinates(df2)
-    
+    '''
     df2 = df[['2-realRank', 'map_ListNet_rerank']]
     fig4 = px.parallel_coordinates(df2)
     
@@ -161,7 +161,7 @@ def update_graph(year):
     fig10 = px.parallel_coordinates(df2)
 
     '''
-    fig3 = go.Parcoords(
+    fig4 = go.Parcoords(
         dimensions=list([
             dict(range=[1, 50],
                  constraintrange=[15, 35],
@@ -317,7 +317,7 @@ def update_graph(year):
     # fig.update_layout(autosize=False, height=1500)
         # fig.show()
     '''
-    return [fig1, fig2,fig3, fig3, fig3, fig3, fig3, fig3, fig3, fig3]
+    return [fig1, fig2,fig3, fig4, fig4, fig4, fig4, fig4, fig4, fig4]
 
 if __name__ == "__main__":
-    app.run_server(debug=False)
+    app.run_server(debug=True)
