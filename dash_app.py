@@ -147,16 +147,13 @@ def update_graph(year):
     '''
     df2 = df[['2-realRank', 'map_RankBoost_rerank']]
     fig6 = px.parallel_coordinates(df2)
-
     df2 = df[['2-realRank', 'map_RankNet_rerank']]
     fig7 = px.parallel_coordinates(df2)
     
     df2 = df[['2-realRank', 'map_coordinate_ascent_rerank']]
     fig8 = px.parallel_coordinates(df2)
-
     df2 = df[['2-realRank', 'map_linear_regression_rerank']]
     fig9 = px.parallel_coordinates(df2)
-
     df2 = df[['2-realRank', 'map_random_forest_rerank']]
     fig10 = px.parallel_coordinates(df2)
     
@@ -313,7 +310,6 @@ def update_graph(year):
     #     row=5,
     #     col=2
     # )
-
     # fig.update_layout(autosize=False, height=1500)
         # fig.show()
     '''
