@@ -145,32 +145,32 @@ def update_graph(year):
     df2 = df[['2-realRank', 'map_MART_rerank']]
     fig5 = px.parallel_coordinates(df2)
 
-    # df2 = df[['2-realRank', 'map_RankBoost_rerank']]
-    # fig6 = px.parallel_coordinates(df2)
+    df2 = df[['2-realRank', 'map_RankBoost_rerank']]
+    fig6 = px.parallel_coordinates(df2)
 
-    # df2 = df[['2-realRank', 'map_RankNet_rerank']]
-    # fig7 = px.parallel_coordinates(df2)
+    df2 = df[['2-realRank', 'map_RankNet_rerank']]
+    fig7 = px.parallel_coordinates(df2)
 
-    # df2 = df[['2-realRank', 'map_coordinate_ascent_rerank']]
-    # fig8 = px.parallel_coordinates(df2)
+    df2 = df[['2-realRank', 'map_coordinate_ascent_rerank']]
+    fig8 = px.parallel_coordinates(df2)
 
-    # df2 = df[['2-realRank', 'map_linear_regression_rerank']]
-    # fig9 = px.parallel_coordinates(df2)
+    df2 = df[['2-realRank', 'map_linear_regression_rerank']]
+    fig9 = px.parallel_coordinates(df2)
 
-    # df2 = df[['2-realRank', 'map_random_forest_rerank']]
-    # fig10 = px.parallel_coordinates(df2)
+    df2 = df[['2-realRank', 'map_random_forest_rerank']]
+    fig10 = px.parallel_coordinates(df2)
     
 
-    fig6 = go.Parcoords(
-        dimensions=list([
-            dict(range=[1, 50],
-                 constraintrange=[15, 35],
-                 label="Ground Truth", values=df['2-realRank']),
+    # fig6 = go.Parcoords(
+    #     dimensions=list([
+    #         dict(range=[1, 50],
+    #              constraintrange=[15, 35],
+    #              label="Ground Truth", values=df['2-realRank']),
 
-            dict(range=[1, 50],
-                 label='LambdaMART Rerank', values=df['map_LambdaMART_rerank'])
-        ])
-    )
+    #         dict(range=[1, 50],
+    #              label='LambdaMART Rerank', values=df['map_LambdaMART_rerank'])
+    #     ])
+    # )
     
     '''
     fig2 = go.Parcoords(
@@ -317,7 +317,7 @@ def update_graph(year):
     # fig.update_layout(autosize=False, height=1500)
         # fig.show()
     '''
-    return [fig1, fig2,fig3, fig4, fig5, fig6, fig6, fig6, fig6, fig6]
+    return [fig1, fig2,fig3, fig4, fig5, fig6, fig7, fig8, fig9, fig10]
     # return [fig1, fig2,fig3, fig4, fig5]
 
 if __name__ == "__main__":
