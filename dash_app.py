@@ -75,6 +75,7 @@ app.layout = html.Div([
                 )
             ]),
             html.Br(),
+            
             html.Div([
                 dcc.Graph(
                     id='Vis-1-6',
@@ -144,19 +145,20 @@ def update_graph(year):
     df2 = df[['2-realRank', 'map_MART_rerank']]
     fig5 = px.parallel_coordinates(df2)
 
-    '''
-    df2 = df[['2-realRank', 'map_RankBoost_rerank']]
-    fig6 = px.parallel_coordinates(df2)
-    df2 = df[['2-realRank', 'map_RankNet_rerank']]
-    fig7 = px.parallel_coordinates(df2)
-    
-    df2 = df[['2-realRank', 'map_coordinate_ascent_rerank']]
-    fig8 = px.parallel_coordinates(df2)
-    df2 = df[['2-realRank', 'map_linear_regression_rerank']]
-    fig9 = px.parallel_coordinates(df2)
-    df2 = df[['2-realRank', 'map_random_forest_rerank']]
-    fig10 = px.parallel_coordinates(df2)
-    '''
+    # df2 = df[['2-realRank', 'map_RankBoost_rerank']]
+    # fig6 = px.parallel_coordinates(df2)
+
+    # df2 = df[['2-realRank', 'map_RankNet_rerank']]
+    # fig7 = px.parallel_coordinates(df2)
+
+    # df2 = df[['2-realRank', 'map_coordinate_ascent_rerank']]
+    # fig8 = px.parallel_coordinates(df2)
+
+    # df2 = df[['2-realRank', 'map_linear_regression_rerank']]
+    # fig9 = px.parallel_coordinates(df2)
+
+    # df2 = df[['2-realRank', 'map_random_forest_rerank']]
+    # fig10 = px.parallel_coordinates(df2)
     
 
     fig6 = go.Parcoords(
@@ -319,4 +321,4 @@ def update_graph(year):
     # return [fig1, fig2,fig3, fig4, fig5]
 
 if __name__ == "__main__":
-    app.run_server(debug=False)
+    app.run_server(debug=True)
