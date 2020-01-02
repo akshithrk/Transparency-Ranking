@@ -126,39 +126,39 @@ app.layout = html.Div([
 
 def update_graph(year):
     # filename = "/Users/ak/Documents/GitHub/Transparency-Ranking/finance datasets/2006.csv"
-    title = "Model re-ranking vs Original ranking for the selected year"
+    # title = "Model re-ranking vs Original ranking for the selected year"
     df1 = pd.read_csv('finance datasets/all.csv')
     df = df1.loc[df1['1-qid'] == int(year)]
 
     df2 = df[['2-realRank', 'map_AdaRank_rerank']]
     fig1 = px.parallel_coordinates(df2)
 
-    df2 = df[['2-realRank', 'map_LambdaMART_rerank']]
-    fig2 = px.parallel_coordinates(df2)
+    df3 = df[['2-realRank', 'map_LambdaMART_rerank']]
+    fig3 = px.parallel_coordinates(df3)
 
-    df2 = df[['2-realRank', 'map_LambdaRank_rerank']]
-    fig3 = px.parallel_coordinates(df2)
+    df4 = df[['2-realRank', 'map_LambdaRank_rerank']]
+    fig4 = px.parallel_coordinates(df4)
 
-    df2 = df[['2-realRank', 'map_ListNet_rerank']]
-    fig4 = px.parallel_coordinates(df2)
+    df5 = df[['2-realRank', 'map_ListNet_rerank']]
+    fig5 = px.parallel_coordinates(df5)
 
-    df2 = df[['2-realRank', 'map_MART_rerank']]
-    fig5 = px.parallel_coordinates(df2)
+    df6 = df[['2-realRank', 'map_MART_rerank']]
+    fig6 = px.parallel_coordinates(df6)
 
-    df2 = df[['2-realRank', 'map_RankBoost_rerank']]
-    fig6 = px.parallel_coordinates(df2)
+    df7 = df[['2-realRank', 'map_RankBoost_rerank']]
+    fig7 = px.parallel_coordinates(df7)
 
-    df2 = df[['2-realRank', 'map_RankNet_rerank']]
-    fig7 = px.parallel_coordinates(df2)
+    df8 = df[['2-realRank', 'map_RankNet_rerank']]
+    fig8 = px.parallel_coordinates(df8)
 
-    df2 = df[['2-realRank', 'map_coordinate_ascent_rerank']]
-    fig8 = px.parallel_coordinates(df2)
+    df9 = df[['2-realRank', 'map_coordinate_ascent_rerank']]
+    fig9 = px.parallel_coordinates(df9)
 
-    df2 = df[['2-realRank', 'map_linear_regression_rerank']]
-    fig9 = px.parallel_coordinates(df2)
+    df10 = df[['2-realRank', 'map_linear_regression_rerank']]
+    fig10 = px.parallel_coordinates(df10)
 
-    df2 = df[['2-realRank', 'map_random_forest_rerank']]
-    fig10 = px.parallel_coordinates(df2)
+    df11 = df[['2-realRank', 'map_random_forest_rerank']]
+    fig11 = px.parallel_coordinates(df11)
     
 
     # fig6 = go.Parcoords(
@@ -317,7 +317,7 @@ def update_graph(year):
     # fig.update_layout(autosize=False, height=1500)
         # fig.show()
     '''
-    return [fig1, fig2,fig3, fig4, fig5, fig6, fig7, fig8, fig9, fig10]
+    return [fig1, fig3, fig4, fig5, fig6, fig7, fig8, fig9, fig10, fig11]
     # return [fig1, fig2,fig3, fig4, fig5]
 
 if __name__ == "__main__":
