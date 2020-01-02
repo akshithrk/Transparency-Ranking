@@ -131,34 +131,34 @@ def update_graph(year):
     df = df1.loc[df1['1-qid'] == int(year)]
 
     df2 = df[['2-realRank', 'map_AdaRank_rerank']]
-    fig1 = px.parallel_coordinates(df2)
+    fig1 = px.parallel_coordinates(df2, width=800, height=400)
 
     df3 = df[['2-realRank', 'map_LambdaMART_rerank']]
-    fig3 = px.parallel_coordinates(df3)
+    fig3 = px.parallel_coordinates(df3, width=800, height=400)
 
     df4 = df[['2-realRank', 'map_LambdaRank_rerank']]
-    fig4 = px.parallel_coordinates(df4)
+    fig4 = px.parallel_coordinates(df4, width=800, height=400)
 
     df5 = df[['2-realRank', 'map_ListNet_rerank']]
-    fig5 = px.parallel_coordinates(df5)
+    fig5 = px.parallel_coordinates(df5, width=800, height=400)
 
     df6 = df[['2-realRank', 'map_MART_rerank']]
-    fig6 = px.parallel_coordinates(df6)
+    fig6 = px.parallel_coordinates(df6, width=800, height=400)
 
     df7 = df[['2-realRank', 'map_RankBoost_rerank']]
-    fig7 = px.parallel_coordinates(df7)
+    fig7 = px.parallel_coordinates(df7, width=800, height=400)
 
     df8 = df[['2-realRank', 'map_RankNet_rerank']]
-    fig8 = px.parallel_coordinates(df8)
+    fig8 = px.parallel_coordinates(df8, width=800, height=400)
 
     df9 = df[['2-realRank', 'map_coordinate_ascent_rerank']]
-    fig9 = px.parallel_coordinates(df9)
+    fig9 = px.parallel_coordinates(df9, width=800, height=400)
 
     df10 = df[['2-realRank', 'map_linear_regression_rerank']]
-    fig10 = px.parallel_coordinates(df10)
+    fig10 = px.parallel_coordinates(df10, width=800, height=400)
 
     df11 = df[['2-realRank', 'map_random_forest_rerank']]
-    fig11 = px.parallel_coordinates(df11)
+    fig11 = px.parallel_coordinates(df11, width=800, height=400)
     
 
     # fig6 = go.Parcoords(
