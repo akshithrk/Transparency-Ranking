@@ -45,8 +45,7 @@ var width=800;
 var height=700;
 var data, datastore, res95, res15, pos, line;
 var svg=d3.select("#chart").append("svg").attr("width",width).attr("height",height);
-d3.csv("/Users/ak/Documents/GitHub/Transparency-Ranking/finance datasets/2006.csv", function(data)
-{
+d3.csv("https://raw.githubusercontent.com/akshithrk/Transparency-Ranking/master/finance%20datasets/2006.csv?token=AB3YK7QCUUMMZ46O747NPB26DS6NW", function(data) {
 // for (i=0;i<data.length;i++)
 // {
 // data[i].co2_05=+data[i].mtpc_05;
