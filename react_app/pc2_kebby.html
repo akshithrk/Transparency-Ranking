@@ -5,18 +5,12 @@
 <script src="https://d3js.org/d3.v4.js"></script>
 
 <!-- Create a div where the graph will take place -->
-<div id="my_dataviz"></div>
+<div id="my_dataviz1"></div>
 <div id="my_dataviz2"></div>
 
-<!-- A bit of style -->
-<style>
-.axis {
-  opacity: 0.4;
-}
-.axis:hover {
-  opacity: 1;
-}
-</style>
+
+<!-- Script for 1st slope chart -->
+
 <script>
 
 // set the dimensions and margins of the graph
@@ -25,7 +19,7 @@ var margin = {top: 30, right: 50, bottom: 10, left: 50},
   height = 800 - margin.top - margin.bottom;
 
 // append the svg object to the body of the page
-var svg = d3.select("#my_dataviz")
+var svg1 = d3.select("#my_dataviz1")
 .append("svg")
   .attr("width", width + margin.left + margin.right)
   .attr("height", height + margin.top + margin.bottom)
@@ -60,6 +54,7 @@ d3.csv("https://raw.githubusercontent.com/akshithrk/Transparency-Ranking/master/
     .domain(dimensions);
 
   // Highlight the state that is hovered
+    /*
   var highlight = function(d){
 
     selected = d.map_AdaRank_rerank
@@ -74,15 +69,16 @@ d3.csv("https://raw.githubusercontent.com/akshithrk/Transparency-Ranking/master/
       .transition().duration(200)
       .style("stroke", color(selected))
       .style("opacity", "1")
-  }
+  } */
 
   // Unhighlight
+    /*
   var doNotHighlight = function(d){
     d3.selectAll(".line")
       .transition().duration(200).delay(1000)
       .style("stroke", function(d){ return( color(d.map_AdaRank_rerank))} )
       .style("opacity", "1")
-  }
+  } */
 
   // The path function take a row of the csv as input, and return x and y coordinates of the line to draw for this raw.
   function path(d) {
@@ -90,7 +86,7 @@ d3.csv("https://raw.githubusercontent.com/akshithrk/Transparency-Ranking/master/
   }
 
   // Draw the lines
-  svg
+  svg1
     .selectAll("myPath")
     .data(data)
     .enter()
@@ -105,7 +101,7 @@ d3.csv("https://raw.githubusercontent.com/akshithrk/Transparency-Ranking/master/
     //   .on("mouseleave", doNotHighlight )
 
   // Draw the axis:
-  svg.selectAll("myAxis")
+  svg1.selectAll("myAxis")
     // For each dimension of the dataset I add a 'g' element:
     .data(dimensions).enter()
     .append("g")
@@ -126,6 +122,8 @@ d3.csv("https://raw.githubusercontent.com/akshithrk/Transparency-Ranking/master/
 
 </script>
 
+<!-- Script for 2nd slope chart -->
+
 <script>
 
 // set the dimensions and margins of the graph
@@ -134,7 +132,7 @@ var margin = {top: 30, right: 50, bottom: 10, left: 50},
   height = 800 - margin.top - margin.bottom;
 
 // append the svg object to the body of the page
-var svg = d3.select("#my_dataviz2")
+var svg2 = d3.select("#my_dataviz2")
 .append("svg")
   .attr("width", width + margin.left + margin.right)
   .attr("height", height + margin.top + margin.bottom)
@@ -169,12 +167,13 @@ d3.csv("https://raw.githubusercontent.com/akshithrk/Transparency-Ranking/master/
     .domain(dimensions);
 
   // Highlight the state that is hovered
+    /*
   var highlight = function(d){
 
     selected = d.map_AdaRank_rerank
 
     // first every group turns grey
-    d3.selectAll("#my_dataviz2 .line")
+    d3.selectAll(".line")
       .transition().duration(200)
       .style("stroke", "lightgrey")
       .style("opacity", "0.2")
@@ -183,24 +182,25 @@ d3.csv("https://raw.githubusercontent.com/akshithrk/Transparency-Ranking/master/
       .transition().duration(200)
       .style("stroke", color(selected))
       .style("opacity", "1")
-  }
+  } */
 
   // Unhighlight
+    /*
   var doNotHighlight = function(d){
-    d3.selectAll("#my_dataviz2 .line")
+    d3.selectAll(".line")
       .transition().duration(200).delay(1000)
       .style("stroke", function(d){ return( color(d.map_AdaRank_rerank))} )
       .style("opacity", "1")
-  }
+  }*/
 
   // The path function take a row of the csv as input, and return x and y coordinates of the line to draw for this raw.
   function path(d) {
       return d3.line()(dimensions.map(function(p) { return [x(p), y[p](d[p])]; }));
   }
 
-  // Draw the linespc.html
-  svg
-    .selectAll("#my_dataviz2 myPath")
+  // Draw the lines
+  svg2
+    .selectAll("myPath")
     .data(data)
     .enter()
     .append("path")
@@ -214,7 +214,7 @@ d3.csv("https://raw.githubusercontent.com/akshithrk/Transparency-Ranking/master/
     //   .on("mouseleave", doNotHighlight )
 
   // Draw the axis:
-  svg.selectAll("#my_dataviz2 myAxis")
+  svg2.selectAll("myAxis")
     // For each dimension of the dataset I add a 'g' element:
     .data(dimensions).enter()
     .append("g")
