@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<head>
+<meta charset="UTF-8">
+<title>Ground Truth vs model Rank Visualization</title>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.min.js"></script>
+
+<style>
+text
+{
+font-size:10pt;
+}
+
+line
+{
+stroke:black;
+}
+
+.heading
+{
+font-size:14pt;
+fill:steelblue;
+}
+
+label
+{
+color:steelblue;
+font-size:14pt;
+padding:0.2em;
+}
+
+label.checked
+{
+background-color:#efefef;
+}
+</style>
+
+</head>
+
+<body>
+<div id="switch"></div>
+<div id="chart"></div>
+
+<script type="text/javascript">
+var width=800;
+var height=800;
+var data, datastore, res95, res15, pos, line;
+var svg=d3.select("#chart").append("svg").attr("width",width).attr("height",height);
+d3.csv("https://raw.githubusercontent.com/akshithrk/Transparency-Ranking/master/finance%20datasets/2006.csv", function(data) {
+for (i=0;i<data.length;i++){
+    // data[i].co2_05=+data[i].mtpc_05;
+    // data[i].co2_13=+data[i].mtpc_13;
+    data[i].two_realRank_x =parseInt(data[i].two_realRank);
+    data[i].map_AdaRank_rerank_x =parseInt(data[i].map_AdaRank_rerank);
+    data[i].idname=data[i].State.replace(/[\.,\s+]/g, ''); //to avoid spaces and dots in the class of the element for proper selection
+}
+
+svg
+  .append("text")
+  .attr("x", 200)
+  .attr("y",30)
+  .attr("text-anchor", "end")
+  .attr("class","heading")
+  .text("Ground Truth");
+  
+svg
+  .append("text")
+  .attr("x", 500)
+  .attr("y",30)
+  .attr("text-anchor", "start")
+  .attr("class","heading")
+  .text("AdaRank Reranking");
+
+datastore=data; //somehow the data-variable is undefined in the draw-function below, not sure why
+pos=(height-30)/datastore.length; //fixed multiplier for the y-positions (might be easier done with d3.axis)
+
+
+// datastore.sort(function(a,b){return d3.descending(a.co2_05,b.co2_13);}) //make the left side
+// datastore.sort(function(a,b){return a.two_realRank + b.map_AdaRank_rerank;})
+res95=svg.selectAll(".res95").data(datastore).enter().append("text").sort(function(a){return d3.ascending(a.two_realRank_x);});
+res95
+  .attr("x",200)
+  .attr("y",function(d,i){d.pos95=45+i*pos; return 50+i*pos;})
+  .attr("text-anchor","end")
+  .text(function(d){return d.State+": "+d.two_realRank;})
+  .attr("class",function(d){return d.idname;})
+  .on("mouseover",function(){
+        d3.selectAll("text."+this.className.baseVal)
+        .style("font-weight","bold")
+        .style("fill","red"); 
+        d3.selectAll("line."+this.className.baseVal).style("stroke","red");
+    })
+  .on("mouseout",function(){
+        d3.selectAll("text."+this.className.baseVal)
+        .style("font-weight","normal")
+        .style("fill","black");
+        d3.selectAll("line."+this.className.baseVal).style("stroke","black");
+    }); //different selection for text and line, because changing the stroke-value would also affect the text
+
+// datastore.sort(function(a,b){return d3.descending(a.co2_05,b.co2_13);}) //make the right side
+// datastore.sort(function(a,b){return a.two_realRank - b.map_AdaRank_rerank;})
+//res15=svg.selectAll(".res15").data(datastore).enter().append("text").sort(function(a,b){return d3.ascending(a.map_AdaRank_rerank,b.map_AdaRank_rerank) || d3.ascending(a.two_realRank, b.map_AdaRank_rerank);});
+res15=svg.selectAll(".res15").data(datastore).enter().append("text").sort(function(a,b){return d3.ascending(a.map_AdaRank_rerank_x,b.map_AdaRank_rerank_x) || d3.ascending(a.two_realRank_x, b.map_AdaRank_rerank_x);});
+    res15
+  .attr("x",500)
+  .attr("y",function(d,i){d.pos15=45+i*pos; return 50+i*pos;})
+  .attr("text-anchor","start")
+  .text(function(d){return d.map_AdaRank_rerank+": "+d.State;})
+  .attr("class",function(d){return d.idname;})
+  .on("mouseover",function(){
+        d3.selectAll("text."+this.className.baseVal)
+        .style("font-weight","bold")
+        .style("fill","red"); 
+        d3.selectAll("line."+this.className.baseVal).style("stroke","red");
+    })
+  .on("mouseout",function(){
+        d3.selectAll("text."+this.className.baseVal)
+        .style("font-weight","normal")
+        .style("fill","black");
+        d3.selectAll("line."+this.className.baseVal).style("stroke","black");
+    });
+
+line=svg.selectAll("line").data(datastore).enter().append("line");  //draw a line between left and right
+line
+  .attr("x1",210)
+  .attr("x2",490)
+  .attr("y1",function(d,i){return d.pos95;})
+  .attr("y2",function(d){return d.pos15;})
+  .attr("class",function(d){return d.idname;});
+});
+</script>
+</body>
+</html>
