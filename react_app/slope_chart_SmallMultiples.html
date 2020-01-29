@@ -32,22 +32,25 @@ label.checked
 {
 background-color:#efefef;
 }
+.container {
+  float: left;
+}
 </style>
 
 </head>
 
 <body>
 <div id="switch"></div>
-<div id="chart"></div>
-<div id="chart2"></div>
-<div id="chart3"></div>
-<div id="chart4"></div>
-<div id="chart5"></div>
-<div id="chart6"></div>
-<div id="chart7"></div>
-<div id="chart8"></div>
-<div id="chart9"></div>
-<div id="chart10"></div>
+<div class="container" id="chart"></div>
+<div class="container" id="chart2"></div>
+<div class="container" id="chart3"></div>
+<div class="container" id="chart4"></div>
+<div class="container" id="chart5"></div>
+<div class="container" id="chart6"></div>
+<div class="container" id="chart7"></div>
+<div class="container" id="chart8"></div>
+<div class="container" id="chart9"></div>
+<div class="container" id="chart10"></div>
 
 
 <script type="text/javascript">
@@ -79,7 +82,7 @@ svg
   .text("AdaRank Reranking");
 
 datastore=data; //somehow the data-variable is undefined in the draw-function below, not sure why
-pos=(height-30)/datastore.length; //fixed multiplier for the y-positions (might be easier done with d3.axis)
+pos=(height-35)/datastore.length; //fixed multiplier for the y-positions (might be easier done with d3.axis)
 
 
 lax=svg.selectAll(".lax").data(datastore).enter().append("text").sort(function(a){return d3.ascending(a.two_realRank_x);});
@@ -162,7 +165,7 @@ line
       .text("LambdaMART Reranking");
     
     datastore=data; //somehow the data-variable is undefined in the draw-function below, not sure why
-    pos=(height-30)/datastore.length; //fixed multiplier for the y-positions (might be easier done with d3.axis)
+    pos=(height-35)/datastore.length; //fixed multiplier for the y-positions (might be easier done with d3.axis)
     
     
     lax2=svg2.selectAll(".lax").data(datastore).enter().append("text").sort(function(a){return d3.ascending(a.two_realRank_x);});
@@ -245,7 +248,7 @@ line
       .text("LambdaRank Reranking");
     
     datastore=data; //somehow the data-variable is undefined in the draw-function below, not sure why
-    pos=(height-30)/datastore.length; //fixed multiplier for the y-positions (might be easier done with d3.axis)
+    pos=(height-35)/datastore.length; //fixed multiplier for the y-positions (might be easier done with d3.axis)
     
     
     lax3=svg3.selectAll(".lax").data(datastore).enter().append("text").sort(function(a){return d3.ascending(a.two_realRank_x);});
@@ -328,7 +331,7 @@ line
       .text("ListNet Reranking");
     
     datastore=data; //somehow the data-variable is undefined in the draw-function below, not sure why
-    pos=(height-30)/datastore.length; //fixed multiplier for the y-positions (might be easier done with d3.axis)
+    pos=(height-35)/datastore.length; //fixed multiplier for the y-positions (might be easier done with d3.axis)
     
     
     lax4=svg4.selectAll(".lax").data(datastore).enter().append("text").sort(function(a){return d3.ascending(a.two_realRank_x);});
@@ -411,7 +414,7 @@ line
       .text("MART Reranking");
     
     datastore=data; //somehow the data-variable is undefined in the draw-function below, not sure why
-    pos=(height-30)/datastore.length; //fixed multiplier for the y-positions (might be easier done with d3.axis)
+    pos=(height-35)/datastore.length; //fixed multiplier for the y-positions (might be easier done with d3.axis)
     
     
     lax5=svg5.selectAll(".lax").data(datastore).enter().append("text").sort(function(a){return d3.ascending(a.two_realRank_x);});
@@ -494,7 +497,7 @@ line
       .text("RankBoost Reranking");
     
     datastore=data; //somehow the data-variable is undefined in the draw-function below, not sure why
-    pos=(height-30)/datastore.length; //fixed multiplier for the y-positions (might be easier done with d3.axis)
+    pos=(height-35)/datastore.length; //fixed multiplier for the y-positions (might be easier done with d3.axis)
     
     
     lax6=svg6.selectAll(".lax").data(datastore).enter().append("text").sort(function(a){return d3.ascending(a.two_realRank_x);});
@@ -577,7 +580,7 @@ line
       .text("RankNet Reranking");
     
     datastore=data; //somehow the data-variable is undefined in the draw-function below, not sure why
-    pos=(height-30)/datastore.length; //fixed multiplier for the y-positions (might be easier done with d3.axis)
+    pos=(height-35)/datastore.length; //fixed multiplier for the y-positions (might be easier done with d3.axis)
     
     
     lax7=svg7.selectAll(".lax").data(datastore).enter().append("text").sort(function(a){return d3.ascending(a.two_realRank_x);});
@@ -660,7 +663,7 @@ line
       .text("CoordinateAscent Reranking");
     
     datastore=data; //somehow the data-variable is undefined in the draw-function below, not sure why
-    pos=(height-30)/datastore.length; //fixed multiplier for the y-positions (might be easier done with d3.axis)
+    pos=(height-35)/datastore.length; //fixed multiplier for the y-positions (might be easier done with d3.axis)
     
     
     lax8=svg8.selectAll(".lax").data(datastore).enter().append("text").sort(function(a){return d3.ascending(a.two_realRank_x);});
@@ -743,7 +746,7 @@ line
       .text("LinearRegression Reranking");
     
     datastore=data; //somehow the data-variable is undefined in the draw-function below, not sure why
-    pos=(height-30)/datastore.length; //fixed multiplier for the y-positions (might be easier done with d3.axis)
+    pos=(height-35)/datastore.length; //fixed multiplier for the y-positions (might be easier done with d3.axis)
     
     
     lax9=svg9.selectAll(".lax").data(datastore).enter().append("text").sort(function(a){return d3.ascending(a.two_realRank_x);});
@@ -826,7 +829,7 @@ line
       .text("RandomForest Reranking");
     
     datastore=data; //somehow the data-variable is undefined in the draw-function below, not sure why
-    pos=(height-30)/datastore.length; //fixed multiplier for the y-positions (might be easier done with d3.axis)
+    pos=(height-35)/datastore.length; //fixed multiplier for the y-positions (might be easier done with d3.axis)
     
     
     lax10=svg10.selectAll(".lax").data(datastore).enter().append("text").sort(function(a){return d3.ascending(a.two_realRank_x);});
