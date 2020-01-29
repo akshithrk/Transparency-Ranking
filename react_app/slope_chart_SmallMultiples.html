@@ -213,7 +213,7 @@ line
       .attr("y2",function(d){return d.rpos;})
       .attr("class",function(d){return d.idname;});
     });
-    </script>
+</script>
 
 <!-- chart 3 -->
 <script type="text/javascript">
@@ -296,8 +296,173 @@ line
       .attr("y2",function(d){return d.rpos;})
       .attr("class",function(d){return d.idname;});
     });
-    </script>
+</script>
 
+<!-- chart 4 -->
+<script type="text/javascript">
+    var width=800;
+    var height=800;
+    var data, datastore, lax4, rax4, pos, line4;
+    var svg4=d3.select("#chart4").append("svg").attr("width",width).attr("height",height);
+    d3.csv("https://raw.githubusercontent.com/akshithrk/Transparency-Ranking/master/finance%20datasets/2006.csv", function(data) {
+      for (i=0;i<data.length;i++){
+          data[i].two_realRank_x =parseInt(data[i].two_realRank);
+          data[i].map_ListNet_rerank_x =parseInt(data[i].map_ListNet_rerank);
+          data[i].idname=data[i].State.replace(/[\.,\s+]/g, ''); //to avoid spaces and dots in the class of the element for proper selection
+      }
+    
+    svg4
+      .append("text")
+      .attr("x", 200)
+      .attr("y",30)
+      .attr("text-anchor", "end")
+      .attr("class","heading")
+      .text("Ground Truth");
+      
+    svg4
+      .append("text")
+      .attr("x", 500)
+      .attr("y",30)
+      .attr("text-anchor", "start")
+      .attr("class","heading")
+      .text("ListNet Reranking");
+    
+    datastore=data; //somehow the data-variable is undefined in the draw-function below, not sure why
+    pos=(height-30)/datastore.length; //fixed multiplier for the y-positions (might be easier done with d3.axis)
+    
+    
+    lax4=svg4.selectAll(".lax").data(datastore).enter().append("text").sort(function(a){return d3.ascending(a.two_realRank_x);});
+    lax4
+      .attr("x",200)
+      .attr("y",function(d,i){d.lpos=45+i*pos; return 50+i*pos;})
+      .attr("text-anchor","end")
+      .text(function(d){return d.State+": "+d.two_realRank;})
+      .attr("class",function(d){return d.idname;})
+      .on("mouseover",function(){
+            d3.selectAll("text."+this.className.baseVal)
+            .style("font-weight","bold")
+            .style("fill","red"); 
+            d3.selectAll("line."+this.className.baseVal).style("stroke","red");
+        })
+      .on("mouseout",function(){
+            d3.selectAll("text."+this.className.baseVal)
+            .style("font-weight","normal")
+            .style("fill","black");
+            d3.selectAll("line."+this.className.baseVal).style("stroke","black");
+        }); //different selection for text and line, because changing the stroke-value would also affect the text
+    
+    rax4=svg4.selectAll(".rax").data(datastore).enter().append("text").sort(function(a,b){return d3.ascending(a.map_ListNet_rerank_x,b.map_ListNet_rerank_x) || d3.ascending(a.two_realRank_x, b.map_ListNet_rerank_x);});
+    rax4
+      .attr("x",500)
+      .attr("y",function(d,i){d.rpos=45+i*pos; return 50+i*pos;})
+      .attr("text-anchor","start")
+      .text(function(d){return d.map_ListNet_rerank+": "+d.State;})
+      .attr("class",function(d){return d.idname;})
+      .on("mouseover",function(){
+            d3.selectAll("text."+this.className.baseVal)
+            .style("font-weight","bold")
+            .style("fill","red"); 
+            d3.selectAll("line."+this.className.baseVal).style("stroke","red");
+        })
+      .on("mouseout",function(){
+            d3.selectAll("text."+this.className.baseVal)
+            .style("font-weight","normal")
+            .style("fill","black");
+            d3.selectAll("line."+this.className.baseVal).style("stroke","black");
+        });
+    
+    line4=svg4.selectAll("line").data(datastore).enter().append("line");  //draw a line between left and right
+    line4
+      .attr("x1",210)
+      .attr("x2",490)
+      .attr("y1",function(d,i){return d.lpos;})
+      .attr("y2",function(d){return d.rpos;})
+      .attr("class",function(d){return d.idname;});
+    });
+</script>
+
+<!-- chart 5 -->
+<script type="text/javascript">
+    var width=800;
+    var height=800;
+    var data, datastore, lax5, rax5, pos, line5;
+    var svg5=d3.select("#chart5").append("svg").attr("width",width).attr("height",height);
+    d3.csv("https://raw.githubusercontent.com/akshithrk/Transparency-Ranking/master/finance%20datasets/2006.csv", function(data) {
+      for (i=0;i<data.length;i++){
+          data[i].two_realRank_x =parseInt(data[i].two_realRank);
+          data[i].map_MART_rerank_x =parseInt(data[i].map_MART_rerank);
+          data[i].idname=data[i].State.replace(/[\.,\s+]/g, ''); //to avoid spaces and dots in the class of the element for proper selection
+      }
+    
+    svg5
+      .append("text")
+      .attr("x", 200)
+      .attr("y",30)
+      .attr("text-anchor", "end")
+      .attr("class","heading")
+      .text("Ground Truth");
+      
+    svg5
+      .append("text")
+      .attr("x", 500)
+      .attr("y",30)
+      .attr("text-anchor", "start")
+      .attr("class","heading")
+      .text("MART Reranking");
+    
+    datastore=data; //somehow the data-variable is undefined in the draw-function below, not sure why
+    pos=(height-30)/datastore.length; //fixed multiplier for the y-positions (might be easier done with d3.axis)
+    
+    
+    lax5=svg5.selectAll(".lax").data(datastore).enter().append("text").sort(function(a){return d3.ascending(a.two_realRank_x);});
+    lax5
+      .attr("x",200)
+      .attr("y",function(d,i){d.lpos=45+i*pos; return 50+i*pos;})
+      .attr("text-anchor","end")
+      .text(function(d){return d.State+": "+d.two_realRank;})
+      .attr("class",function(d){return d.idname;})
+      .on("mouseover",function(){
+            d3.selectAll("text."+this.className.baseVal)
+            .style("font-weight","bold")
+            .style("fill","red"); 
+            d3.selectAll("line."+this.className.baseVal).style("stroke","red");
+        })
+      .on("mouseout",function(){
+            d3.selectAll("text."+this.className.baseVal)
+            .style("font-weight","normal")
+            .style("fill","black");
+            d3.selectAll("line."+this.className.baseVal).style("stroke","black");
+        }); //different selection for text and line, because changing the stroke-value would also affect the text
+    
+    rax5=svg5.selectAll(".rax").data(datastore).enter().append("text").sort(function(a,b){return d3.ascending(a.map_MART_rerank_x,b.map_MART_rerank_x) || d3.ascending(a.two_realRank_x, b.map_MART_rerank_x);});
+    rax5
+      .attr("x",500)
+      .attr("y",function(d,i){d.rpos=45+i*pos; return 50+i*pos;})
+      .attr("text-anchor","start")
+      .text(function(d){return d.map_MART_rerank+": "+d.State;})
+      .attr("class",function(d){return d.idname;})
+      .on("mouseover",function(){
+            d3.selectAll("text."+this.className.baseVal)
+            .style("font-weight","bold")
+            .style("fill","red"); 
+            d3.selectAll("line."+this.className.baseVal).style("stroke","red");
+        })
+      .on("mouseout",function(){
+            d3.selectAll("text."+this.className.baseVal)
+            .style("font-weight","normal")
+            .style("fill","black");
+            d3.selectAll("line."+this.className.baseVal).style("stroke","black");
+        });
+    
+    line5=svg5.selectAll("line").data(datastore).enter().append("line");  //draw a line between left and right
+    line5
+      .attr("x1",210)
+      .attr("x2",490)
+      .attr("y1",function(d,i){return d.lpos;})
+      .attr("y2",function(d){return d.rpos;})
+      .attr("class",function(d){return d.idname;});
+    });
+</script>
 
 </body>
 </html>
