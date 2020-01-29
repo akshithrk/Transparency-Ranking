@@ -103,7 +103,13 @@ lax
         .style("font-weight","normal")
         .style("fill","black");
         d3.selectAll("line."+this.className.baseVal).style("stroke","black");
-    }); //different selection for text and line, because changing the stroke-value would also affect the text
+    }) //different selection for text and line, because changing the stroke-value would also affect the text
+    .on("click",function(){
+            d3.selectAll("text."+this.className.baseVal)
+                .style("fill","blue")
+            d3.selectAll("line."+this.className.baseVal)
+                .style("stroke","blue");
+      });
 
 rax=svg.selectAll(".rax").data(datastore).enter().append("text").sort(function(a,b){return d3.ascending(a.map_AdaRank_rerank_x,b.map_AdaRank_rerank_x) || d3.ascending(a.two_realRank_x, b.map_AdaRank_rerank_x);});
     rax
@@ -123,7 +129,13 @@ rax=svg.selectAll(".rax").data(datastore).enter().append("text").sort(function(a
         .style("font-weight","normal")
         .style("fill","black");
         d3.selectAll("line."+this.className.baseVal).style("stroke","black");
-    });
+    })
+    .on("click",function(){
+            d3.selectAll("text."+this.className.baseVal)
+                .style("stroke","blue")
+            d3.selectAll("line."+this.className.baseVal)
+                .style("stroke","blue");
+      });
 
 line=svg.selectAll("line").data(datastore).enter().append("line");  //draw a line between left and right
 line
@@ -767,8 +779,17 @@ line
             .style("font-weight","normal")
             .style("fill","black");
             d3.selectAll("line."+this.className.baseVal).style("stroke","black");
-        }); //different selection for text and line, because changing the stroke-value would also affect the text
-    
+        }) //different selection for text and line, because changing the stroke-value would also affect the text
+      .on("click",function(){
+            d3.selectAll(".text")
+            .style("opacity", "0.2")
+            d3.selectAll("text."+this.className.baseVal)
+            .style("opacity", "1")
+            .style("stroke","blue")
+            d3.selectAll("line."+this.className.baseVal)
+            .style("stroke","blue");
+      });
+
     rax9=svg9.selectAll(".rax").data(datastore).enter().append("text").sort(function(a,b){return d3.ascending(a.map_linear_regression_rerank_x,b.map_linear_regression_rerank_x) || d3.ascending(a.two_realRank_x, b.map_linear_regression_rerank_x);});
     rax9
       .attr("x",500)
@@ -787,7 +808,16 @@ line
             .style("font-weight","normal")
             .style("fill","black");
             d3.selectAll("line."+this.className.baseVal).style("stroke","black");
-        });
+        })
+        .on("click",function(){
+            d3.selectAll(".text")
+            .style("opacity", "0.2")
+            d3.selectAll("text."+this.className.baseVal)
+            .style("opacity", "1")
+            .style("stroke","blue")
+            d3.selectAll("line."+this.className.baseVal)
+            .style("stroke","blue");
+      });
     
     line9=svg9.selectAll("line").data(datastore).enter().append("line");  //draw a line between left and right
     line9
