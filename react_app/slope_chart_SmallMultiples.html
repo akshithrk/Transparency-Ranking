@@ -92,18 +92,6 @@ lax
   .attr("text-anchor","end")
   .text(function(d){return d.State+": "+d.two_realRank;})
   .attr("class",function(d){return d.idname;})
-  .on("mouseover",function(){
-        d3.selectAll("text."+this.className.baseVal)
-        .style("font-weight","bold")
-        .style("fill","red"); 
-        d3.selectAll("line."+this.className.baseVal).style("stroke","red");
-    })
-  .on("mouseout",function(){
-        d3.selectAll("text."+this.className.baseVal)
-        .style("font-weight","normal")
-        .style("fill","black");
-        d3.selectAll("line."+this.className.baseVal).style("stroke","black");
-    }) //different selection for text and line, because changing the stroke-value would also affect the text
     .on("click",function(){
             d3.selectAll("text."+this.className.baseVal)
                 .style("stroke","blue")
@@ -119,18 +107,6 @@ rax=svg.selectAll(".rax").data(datastore).enter().append("text").sort(function(a
   .attr("text-anchor","start")
   .text(function(d){return d.map_AdaRank_rerank+": "+d.State;})
   .attr("class",function(d){return d.idname;})
-  .on("mouseover",function(){
-        d3.selectAll("text."+this.className.baseVal)
-        .style("font-weight","bold")
-        .style("fill","red"); 
-        d3.selectAll("line."+this.className.baseVal).style("stroke","red");
-    })
-  .on("mouseout",function(){
-        d3.selectAll("text."+this.className.baseVal)
-        .style("font-weight","normal")
-        .style("fill","black");
-        d3.selectAll("line."+this.className.baseVal).style("stroke","black");
-    })
     .on("click",function(){
             d3.selectAll("text."+this.className.baseVal)
                 .style("stroke","blue")

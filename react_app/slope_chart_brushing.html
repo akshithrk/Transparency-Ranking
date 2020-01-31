@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <head>
 <meta charset="UTF-8">
-<title>Ground Truth vs model Rank Visualization</title>
+<title>Brushing</title>
 <script type="text/javascript" src="https://d3js.org/d3.v4.js"></script>
 
 <style>
@@ -86,18 +86,12 @@ res95
   .attr("text-anchor","end")
   .text(function(d){return d.State+": "+d.two_realRank;})
   .attr("class",function(d){return d.idname;})
-  .on("mouseover",function(){
-        d3.selectAll("text."+this.className.baseVal)
-        .style("font-weight","bold")
-        .style("fill","red"); 
-        d3.selectAll("line."+this.className.baseVal).style("stroke","red");
-    })
-  .on("mouseout",function(){
-        d3.selectAll("text."+this.className.baseVal)
-        .style("font-weight","normal")
-        .style("fill","black");
-        d3.selectAll("line."+this.className.baseVal).style("stroke","black");
-    }); //different selection for text and line, because changing the stroke-value would also affect the text
+    .on("click",function(){
+            d3.selectAll("text."+this.className.baseVal)
+                .style("stroke","blue")
+            d3.selectAll("line."+this.className.baseVal)
+                .style("stroke","blue");
+      });
 
 //make the right side
 res15=svg.selectAll(".res15").data(datastore).enter().append("text").sort(function(a,b){return d3.ascending(a.map_AdaRank_rerank_x,b.map_AdaRank_rerank_x) || d3.ascending(a.two_realRank_x, b.map_AdaRank_rerank_x);});
@@ -107,18 +101,12 @@ res15=svg.selectAll(".res15").data(datastore).enter().append("text").sort(functi
   .attr("text-anchor","start")
   .text(function(d){return d.map_AdaRank_rerank+": "+d.State;})
   .attr("class",function(d){return d.idname;})
-  .on("mouseover",function(){
-        d3.selectAll("text."+this.className.baseVal)
-        .style("font-weight","bold")
-        .style("fill","red"); 
-        d3.selectAll("line."+this.className.baseVal).style("stroke","red");
-    })
-  .on("mouseout",function(){
-        d3.selectAll("text."+this.className.baseVal)
-        .style("font-weight","normal")
-        .style("fill","black");
-        d3.selectAll("line."+this.className.baseVal).style("stroke","black");
-    });
+    .on("click",function(){
+            d3.selectAll("text."+this.className.baseVal)
+                .style("stroke","blue")
+            d3.selectAll("line."+this.className.baseVal)
+                .style("stroke","blue");
+      });
 
 line=svg.selectAll("line").data(datastore).enter().append("line");  //draw a line between left and right
 line
