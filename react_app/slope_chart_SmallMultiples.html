@@ -106,10 +106,11 @@ lax
     }) //different selection for text and line, because changing the stroke-value would also affect the text
     .on("click",function(){
             d3.selectAll("text."+this.className.baseVal)
-                .style("fill","blue")
+                .style("stroke","blue")
             d3.selectAll("line."+this.className.baseVal)
                 .style("stroke","blue");
       });
+
 
 rax=svg.selectAll(".rax").data(datastore).enter().append("text").sort(function(a,b){return d3.ascending(a.map_AdaRank_rerank_x,b.map_AdaRank_rerank_x) || d3.ascending(a.two_realRank_x, b.map_AdaRank_rerank_x);});
     rax
@@ -145,6 +146,7 @@ line
   .attr("y2",function(d){return d.rpos;})
   .attr("class",function(d){return d.idname;});
 });
+
 </script>
 
 <!-- chart 2 -->
