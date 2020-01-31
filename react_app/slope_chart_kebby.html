@@ -73,9 +73,7 @@ svg
 datastore=data; //somehow the data-variable is undefined in the draw-function below, not sure why
 pos=(height-30)/datastore.length; //fixed multiplier for the y-positions (might be easier done with d3.axis)
 
-
-// datastore.sort(function(a,b){return d3.descending(a.co2_05,b.co2_13);}) //make the left side
-// datastore.sort(function(a,b){return a.two_realRank + b.map_AdaRank_rerank;})
+//make the left side
 res95=svg.selectAll(".res95").data(datastore).enter().append("text").sort(function(a){return d3.ascending(a.two_realRank_x);});
 res95
   .attr("x",200)
@@ -96,9 +94,7 @@ res95
         d3.selectAll("line."+this.className.baseVal).style("stroke","black");
     }); //different selection for text and line, because changing the stroke-value would also affect the text
 
-// datastore.sort(function(a,b){return d3.descending(a.co2_05,b.co2_13);}) //make the right side
-// datastore.sort(function(a,b){return a.two_realRank - b.map_AdaRank_rerank;})
-//res15=svg.selectAll(".res15").data(datastore).enter().append("text").sort(function(a,b){return d3.ascending(a.map_AdaRank_rerank,b.map_AdaRank_rerank) || d3.ascending(a.two_realRank, b.map_AdaRank_rerank);});
+//make the right side
 res15=svg.selectAll(".res15").data(datastore).enter().append("text").sort(function(a,b){return d3.ascending(a.map_AdaRank_rerank_x,b.map_AdaRank_rerank_x) || d3.ascending(a.two_realRank_x, b.map_AdaRank_rerank_x);});
     res15
   .attr("x",500)
