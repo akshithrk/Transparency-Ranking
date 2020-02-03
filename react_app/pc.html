@@ -17,6 +17,7 @@
   opacity: 1;
 }
 </style>
+
 <script>
 
 // set the dimensions and margins of the graph
@@ -39,7 +40,7 @@ d3.csv("https://raw.githubusercontent.com/akshithrk/Transparency-Ranking/master/
   // Color scale: give me a state name, I return a color
   var color = d3.scaleOrdinal()
     // .domain(["setosa", "versicolor", "virginica" ])
-    .range([ "#440154ff", "#21908dff", "#fde725ff"])
+    .range(["black"])
 
   // Here I set the list of dimension manually to control the order of axis:
   dimensions = ["two_realRank", "map_AdaRank_rerank"]
@@ -51,7 +52,7 @@ d3.csv("https://raw.githubusercontent.com/akshithrk/Transparency-Ranking/master/
     y[name] = d3.scaleLinear()
       .domain( [0,50] ) // --> Same axis range for each group
       // --> different axis range for each group --> .domain( [d3.extent(data, function(d) { return +d[name]; })] )
-      .range([height, 0])
+      .range([height, 1])
   }
 
   // Build the X scale -> it find the best position for each Y axis
@@ -95,12 +96,11 @@ d3.csv("https://raw.githubusercontent.com/akshithrk/Transparency-Ranking/master/
     .data(data)
     .enter()
     .append("path")
-      .attr("class", function (d) { return d.map_AdaRank_rerank } ) // 2 class for each line: 'line' and the group name
+      .attr("class", function (d) { return "line " + d.map_AdaRank_rerank } ) // 2 class for each line: 'line' and the group name
       .attr("d",  path)
       .style("fill", "none" )
       .style("stroke", function(d){ return( color(d.map_AdaRank_rerank))} )
       .style("opacity", 0.5)
-      .text(function(d){return d.State+": "+d.two_realRank;})
     //   .on("mouseover", highlight)
     //   .on("mouseleave", doNotHighlight )
 
@@ -120,6 +120,7 @@ d3.csv("https://raw.githubusercontent.com/akshithrk/Transparency-Ranking/master/
       .attr("y", -9)
       .text(function(d) { return d; })
       .style("fill", "black")
+      
 
 })
 
