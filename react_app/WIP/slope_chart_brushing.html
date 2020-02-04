@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <head>
 <meta charset="UTF-8">
-<title>Brushing</title>
+<title>SC_Brushing</title>
 <script type="text/javascript" src="https://d3js.org/d3.v4.js"></script>
 
 <style>
@@ -32,6 +32,12 @@ label.checked
 {
 background-color:#efefef;
 }
+
+.selected {
+  opacity: 1 !important;
+  stroke: black;
+  stroke-width: 1px;
+}
 </style>
 
 </head>
@@ -43,7 +49,7 @@ background-color:#efefef;
 <script type="text/javascript">
 var width=800;
 var height=800;
-var data, datastore, res95, res15, pos, line;
+var data, datastore, res95, res15, pos, line, res95_b;
 var svg=d3.select("#chart").append("svg").attr("width",width).attr("height",height);
 d3.csv("https://raw.githubusercontent.com/akshithrk/Transparency-Ranking/master/finance%20datasets/2006.csv", function(data) {
 for (i=0;i<data.length;i++){
@@ -73,10 +79,11 @@ svg
 datastore=data; //somehow the data-variable is undefined in the draw-function below, not sure why
 pos=(height-30)/datastore.length; //fixed multiplier for the y-positions (might be easier done with d3.axis)
 
-d3.select("#dataviz_brushing1D")
-      .call( d3.brushY()                     // Add the brush feature using the d3.brush function
-        .extent( [ [0,100], [800,800] ] )       // initialise the brush area: start at 0,0 and finishes at width,height: it means I select the whole graph area
-      )
+// Function when brushing is performed
+function updateChart() {
+    extent = d3.event.selection
+    res95.classed("selected")
+  }
 
 //make the left side
 res95=svg.selectAll(".res95").data(datastore).enter().append("text").sort(function(a){return d3.ascending(a.two_realRank_x);});
@@ -86,12 +93,13 @@ res95
     .attr("text-anchor","end")
     .text(function(d){return d.State+": "+d.two_realRank;})
     .attr("class",function(d){return d.idname;})
-    .on("click",function(){
-        d3.selectAll("text."+this.className.baseVal)
-            .style("stroke","blue")
-        d3.selectAll("line."+this.className.baseVal)
-            .style("stroke","blue");
-      });
+    // .on("click",function(){
+    //     d3.selectAll("text."+this.className.baseVal)
+    //         .style("stroke","blue")
+    //     d3.selectAll("line."+this.className.baseVal)
+    //         .style("stroke","blue");});
+    // .attr("class", "brush")
+    // .call(brush);
     
 
 //make the right side
@@ -109,6 +117,7 @@ res15
             .style("stroke","blue");
       });
 
+// draw line
 line=svg.selectAll("line").data(datastore).enter().append("line");  //draw a line between left and right
 line
   .attr("x1",210)
@@ -116,6 +125,13 @@ line
   .attr("y1",function(d,i){return d.pos95;})
   .attr("y2",function(d){return d.pos15;})
   .attr("class",function(d){return d.idname;});
+
+
+// add brushing
+// res95
+//   .append("g")
+//   .attr("class", "brush")
+//   .call(brush);
 });
 </script>
 </body>
