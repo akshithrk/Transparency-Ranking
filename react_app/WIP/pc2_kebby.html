@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <meta charset="utf-8">
-<title>PC_SmallMultiples</title>
+<title>PC_Brushing</title>
 <style>
 .container {
   float: left;
@@ -8,7 +8,7 @@
 
 .selected {
   opacity: 1 !important;
-  stroke: black;
+  fill: black;
   stroke-width: 1px;
 }
 </style>
@@ -18,15 +18,6 @@
 
 <!-- Create a div where the graph will take place -->
 <div class="container" id="my_dataviz1"></div>
-<div class="container" id="my_dataviz2"></div>
-<div class="container" id="my_dataviz3"></div>
-<div class="container" id="my_dataviz4"></div>
-<div class="container" id="my_dataviz5"></div>
-<div class="container" id="my_dataviz6"></div>
-<div class="container" id="my_dataviz7"></div>
-<div class="container" id="my_dataviz8"></div>
-<div class="container" id="my_dataviz9"></div>
-<div class="container" id="my_dataviz10"></div>
 
 
 <!-- Script for 1st slope chart -->
@@ -115,7 +106,7 @@ d3.csv("https://raw.githubusercontent.com/akshithrk/Transparency-Ranking/master/
       .attr("d",  path)
       .style("fill", "none" )
       .style("stroke", function(d){ return( color(d.map_AdaRank_rerank))} )
-      .style("opacity", 0.5)
+      .style("opacity", .5)
       .text(function(d){return d.State+": "+d.two_realRank;})
     //   .on("mouseover", highlight)
     //   .on("mouseleave", doNotHighlight )
@@ -136,132 +127,20 @@ d3.csv("https://raw.githubusercontent.com/akshithrk/Transparency-Ranking/master/
       .attr("y", -9)
       .text(function(d) { return d; })
       .style("fill", "black")
-
+  
+  // add brushing
   svg1
     .call( d3.brush()                 // Add the brush feature using the d3.brush function
     .extent( [ [0,0], [width,height] ] ) // initialise the brush area: start at 0,0 and finishes at width,height: it means I select the whole graph area
-    // .on("start brush", updateChart) // Each time the brush selection changes, trigger the 'updateChart' function
+    .on("start brush", updateChart) // Each time the brush selection changes, trigger the 'updateChart' function
     )
 
-  // Function that is triggered when brushing is performed
+  // Brushing Function
   function updateChart() {
     extent = d3.event.selection
     svg1.classed("selected", function(d){return isBrushed(extent, y(d.two_realRank))} )
     // myCircle.classed("selected", function(d){ return isBrushed(extent, x(d.Sepal_Length), y(d.Petal_Length) ) } )
   }
-})
-
-
-</script>
-
-<!-- Script for 2nd slope chart -->
-
-<script>
-
-// set the dimensions and margins of the graph
-var margin = {top: 30, right: 50, bottom: 10, left: 50},
-  width = 460 - margin.left - margin.right,
-  height = 800 - margin.top - margin.bottom;
-
-// append the svg object to the body of the page
-var svg2 = d3.select("#my_dataviz2")
-.append("svg")
-  .attr("width", width + margin.left + margin.right)
-  .attr("height", height + margin.top + margin.bottom)
-.append("g")
-  .attr("transform",
-        "translate(" + margin.left + "," + margin.top + ")");
-
-// Parse the Data
-d3.csv("https://raw.githubusercontent.com/akshithrk/Transparency-Ranking/master/finance%20datasets/2006.csv", function(data) {
-
-  // Color scale: give me a state name, I return a color
-  var color = d3.scaleOrdinal()
-    // .domain(["setosa", "versicolor", "virginica" ])
-    .range([ "#440154ff", "#21908dff", "#fde725ff"])
-
-  // Here I set the list of dimension manually to control the order of axis:
-  dimensions = ["two_realRank", "map_AdaRank_rerank"]
-
-  // For each dimension, I build a linear scale. I store all in a y object
-  var y = {}
-  for (i in dimensions) {
-    name = dimensions[i]
-    y[name] = d3.scaleLinear()
-      .domain( [0,50] ) // --> Same axis range for each group
-      // --> different axis range for each group --> .domain( [d3.extent(data, function(d) { return +d[name]; })] )
-      .range([height, 0])
-  }
-
-  // Build the X scale -> it find the best position for each Y axis
-  x = d3.scalePoint()
-    .range([0, width])
-    .domain(dimensions);
-
-  // Highlight the state that is hovered
-    /*
-  var highlight = function(d){
-
-    selected = d.map_AdaRank_rerank
-
-    // first every group turns grey
-    d3.selectAll(".line")
-      .transition().duration(200)
-      .style("stroke", "lightgrey")
-      .style("opacity", "0.2")
-    // Second the hovered specie takes its color
-    d3.selectAll("." + selected)
-      .transition().duration(200)
-      .style("stroke", color(selected))
-      .style("opacity", "1")
-  } */
-
-  // Unhighlight
-    /*
-  var doNotHighlight = function(d){
-    d3.selectAll(".line")
-      .transition().duration(200).delay(1000)
-      .style("stroke", function(d){ return( color(d.map_AdaRank_rerank))} )
-      .style("opacity", "1")
-  }*/
-
-  // The path function take a row of the csv as input, and return x and y coordinates of the line to draw for this raw.
-  function path(d) {
-      return d3.line()(dimensions.map(function(p) { return [x(p), y[p](d[p])]; }));
-  }
-
-  // Draw the lines
-  svg2
-    .selectAll("myPath")
-    .data(data)
-    .enter()
-    .append("path")
-      .attr("class", function (d) { return d.map_AdaRank_rerank } ) // 2 class for each line: 'line' and the group name
-      .attr("d",  path)
-      .style("fill", "none" )
-      .style("stroke", function(d){ return( color(d.map_AdaRank_rerank))} )
-      .style("opacity", 0.5)
-      .text(function(d){return d.State+": "+d.two_realRank;})
-    //   .on("mouseover", highlight)
-    //   .on("mouseleave", doNotHighlight )
-
-  // Draw the axis:
-  svg2.selectAll("myAxis")
-    // For each dimension of the dataset I add a 'g' element:
-    .data(dimensions).enter()
-    .append("g")
-    .attr("class", "axis")
-    // I translate this element to its right position on the x axis
-    .attr("transform", function(d) { return "translate(" + x(d) + ")"; })
-    // And I build the axis with the call function
-    .each(function(d) { d3.select(this).call(d3.axisLeft().ticks(50).scale(y[d])); })
-    // Add axis title
-    .append("text")
-      .style("text-anchor", "middle")
-      .attr("y", -9)
-      .text(function(d) { return d; })
-      .style("fill", "black")
-
 })
 
 
