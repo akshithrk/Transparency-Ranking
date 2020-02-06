@@ -69,30 +69,30 @@ for (i=0;i<data.length;i++){
     .domain(dimensions);
   var yR = d3.scaleLinear();
 
-    // Highlight the state that is hovered
-    var highlight = function(d){
+    // // Highlight the state that is hovered
+    // var highlight = function(d){
 
-      selected = d.map_AdaRank_rerank_x
+    //   selected = d.map_AdaRank_rerank_x
 
-      // first every group turns grey
-      d3.selectAll(".line")
-        .transition().duration(200)
-        .style("stroke", "lightgrey")
-        .style("opacity", "0.2")
-      // Second the hovered specie takes its color
-      d3.selectAll("." + selected)
-        .transition().duration(200)
-        .style("stroke", color(selected))
-        .style("opacity", "1")
-    }
+    //   // first every group turns grey
+    //   d3.selectAll(".line")
+    //     .transition().duration(200)
+    //     .style("stroke", "lightgrey")
+    //     .style("opacity", "0.2")
+    //   // Second the hovered specie takes its color
+    //   d3.selectAll("." + selected)
+    //     .transition().duration(200)
+    //     .style("stroke", color(selected))
+    //     .style("opacity", "1")
+    // }
 
-    // Unhighlight
-    var doNotHighlight = function(d){
-      d3.selectAll(".line")
-        .transition().duration(200).delay(1000)
-        .style("stroke", function(d){ return( color(d.map_AdaRank_rerank_x))} )
-        .style("opacity", "1")
-    }
+    // // Unhighlight
+    // var doNotHighlight = function(d){
+    //   d3.selectAll(".line")
+    //     .transition().duration(200).delay(1000)
+    //     .style("stroke", function(d){ return( color(d.map_AdaRank_rerank_x))} )
+    //     .style("opacity", "1")
+    // }
 
   // The path function take a row of the csv as input, and return x and y coordinates of the line to draw for this raw.
   function path(d) {
@@ -143,7 +143,7 @@ for (i=0;i<data.length;i++){
   // Brushing Function
   function updateChart() {
     extent = d3.event.selection // looks like [[12,11], [132,178]]
-    myCircle.classed("selected", function(d){console.log(isBrushed(extent, yR(d.two_realRank_x), yR(d.map_AdaRank_rerank_x)));}) //return isBrushed(extent, d.two_realRank, d.map_AdaRank_rerank)} )
+    myCircle.classed("selected", function(d){ return isBrushed(extent, yR(d.two_realRank_x), yR(d.map_AdaRank_rerank_x))}) //return isBrushed(extent, d.two_realRank, d.map_AdaRank_rerank)} )
   }
 
   // A function that return TRUE or FALSE according if a dot is in the selection or not
@@ -152,7 +152,7 @@ for (i=0;i<data.length;i++){
            x1 = brush_coords[1][0],
            y0 = brush_coords[0][1],
            y1 = brush_coords[1][1];
-      return x0 <= cx && cx <= x1 || y0 <= cy && cy <= y1;    // This return TRUE or FALSE depending on if the points is in the selected area
+      return x0 <= cx && cx <= x1 && y0 <= cy && cy <= y1;    // This return TRUE or FALSE depending on if the points is in the selected area
   }
 })
 
