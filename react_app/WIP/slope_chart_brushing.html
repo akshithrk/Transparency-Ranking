@@ -46,8 +46,15 @@ background-color:#efefef;
 <body>
 <div id="switch"></div>
 <div id="chart"></div>
+<svg class="sparkline" width="100" height="30" stroke-width="3"></svg>
+
+<script>
+  sparkline(document.querySelector(".sparkline"), [1, 5, 2, 4, 8, 3, 7]);
+</script>
 
 <script type="text/javascript">
+
+
 var width=800;
 var height=800;
 var data, datastore, res95, res15, pos, line;
