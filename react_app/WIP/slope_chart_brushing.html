@@ -1,8 +1,9 @@
 <!DOCTYPE html>
 <head>
 <meta charset="UTF-8">
-<title>Brushing</title>
+<title>SC_Brushing</title>
 <script type="text/javascript" src="https://d3js.org/d3.v4.js"></script>
+<script src="https://d3js.org/d3-brush.v1.min.js"></script>
 
 <style>
 text
@@ -32,6 +33,12 @@ label.checked
 {
 background-color:#efefef;
 }
+
+.selected {
+  opacity: 1 !important;
+  stroke: black;
+  stroke-width: 1px;
+}
 </style>
 
 </head>
@@ -39,8 +46,15 @@ background-color:#efefef;
 <body>
 <div id="switch"></div>
 <div id="chart"></div>
+<svg class="sparkline" width="100" height="30" stroke-width="3"></svg>
+
+<script>
+  sparkline(document.querySelector(".sparkline"), [1, 5, 2, 4, 8, 3, 7]);
+</script>
 
 <script type="text/javascript">
+
+
 var width=800;
 var height=800;
 var data, datastore, res95, res15, pos, line;
@@ -68,15 +82,16 @@ svg
   .attr("y",30)
   .attr("text-anchor", "start")
   .attr("class","heading")
-  .text("AdaRank Reranking");
+  .text("AdaRank");
 
 datastore=data; //somehow the data-variable is undefined in the draw-function below, not sure why
 pos=(height-30)/datastore.length; //fixed multiplier for the y-positions (might be easier done with d3.axis)
 
-d3.select("#dataviz_brushing1D")
-      .call( d3.brushY()                     // Add the brush feature using the d3.brush function
-        .extent( [ [0,100], [800,800] ] )       // initialise the brush area: start at 0,0 and finishes at width,height: it means I select the whole graph area
-      )
+// Function when brushing is performed
+function updateChart() {
+    extent = d3.event.selection
+    res95_2.classed("selected")
+  }
 
 //make the left side
 res95=svg.selectAll(".res95").data(datastore).enter().append("text").sort(function(a){return d3.ascending(a.two_realRank_x);});
@@ -86,12 +101,13 @@ res95
     .attr("text-anchor","end")
     .text(function(d){return d.State+": "+d.two_realRank;})
     .attr("class",function(d){return d.idname;})
-    .on("click",function(){
-        d3.selectAll("text."+this.className.baseVal)
-            .style("stroke","blue")
-        d3.selectAll("line."+this.className.baseVal)
-            .style("stroke","blue");
-      });
+    // .on("click",function(){
+    //     d3.selectAll("text."+this.className.baseVal)
+    //         .style("stroke","blue")
+    //     d3.selectAll("line."+this.className.baseVal)
+    //         .style("stroke","blue");});
+    // .attr("class", "brush")
+    // .call(brush);
     
 
 //make the right side
@@ -109,6 +125,7 @@ res15
             .style("stroke","blue");
       });
 
+// draw line
 line=svg.selectAll("line").data(datastore).enter().append("line");  //draw a line between left and right
 line
   .attr("x1",210)
@@ -116,6 +133,30 @@ line
   .attr("y1",function(d,i){return d.pos95;})
   .attr("y2",function(d){return d.pos15;})
   .attr("class",function(d){return d.idname;});
+
+
+// add brushing
+var res95_2=svg.selectAll(".res95").data(datastore).enter().append("text").sort(function(a){return d3.ascending(a.two_realRank_x);});
+res95_2
+    .call( d3.brush()                 // Add the brush feature using the d3.brush function
+    .extent( [ [0,0], [width,height] ] ) // initialise the brush area: start at 0,0 and finishes at width,height: it means I select the whole graph area
+    // .on("start brush", updateChart) // Each time the brush selection changes, trigger the 'updateChart' function
+    )
+
+  // // Brushing Function
+  // function updateChart() {
+  //   extent = d3.event.selection
+  //   line.classed("selected", function(d){return isBrushed(extent, y(d.two_realRank_x), y(d.map_AdaRank_rerank_x))} )
+  // }
+
+  // // A function that return TRUE or FALSE according if a dot is in the selection or not
+  // function isBrushed(brush_coords, cx, cy) {
+  //      var x0 = brush_coords[0][0],
+  //          x1 = brush_coords[1][0],
+  //          y0 = brush_coords[0][1],
+  //          y1 = brush_coords[1][1];
+  //     return x0 <= cx && cx <= y0 && x1 <= cy && cy <= y1;    // This return TRUE or FALSE depending on if the points is in the selected area
+  // }
 });
 </script>
 </body>
